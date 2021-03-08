@@ -36,3 +36,65 @@
     transform: rotate(360deg);
   }
 }
+
+.Container {
+  background-color: White;
+  display: grid;
+  grid-template-columns: auto 50vh auto;
+  grid-template-rows: auto 50vh auto;
+  height: 100vh;
+  width: 100vw;
+}
+
+.Floor {
+  background-color: grey;
+  grid-column-start: 2;
+  grid-row-start: 2;
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-rows: 33.3% 33.3% 33.3%;
+  padding: 1%;
+}
+.Room {
+  background-color: rgb(128, 94, 43);
+  size: 100%;
+  margin: 5%;
+  text-align: center;
+}
+
+.One {
+  grid-column-start: 1;
+  grid-row-start: 1;
+}
+.Two {
+  grid-column-start: 2;
+  grid-row-start: 1;
+}
+.Three {
+  grid-column-start: 3;
+  grid-row-start: 1;
+}
+.Four {
+  grid-column-start: 1;
+  grid-row-start: 2;
+}
+.Five {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
+.Six {
+  grid-column-start: 3;
+  grid-row-start: 2;
+}
+.Seven {
+  grid-column-start: 1;
+  grid-row-start: 3;
+}
+.Eight {
+  grid-column-start: 2;
+  grid-row-start: 3;
+}
+.Nine {
+  grid-column-start: 3;
+  grid-row-start: 3;
+}
