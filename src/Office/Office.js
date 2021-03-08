@@ -4,37 +4,46 @@ import Room from "./Room.js";
 class Office extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClose = this.handleClose.bind(this);
     this.state = {
-      showModal: true,
+      roomName:
+        "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
+      userFullName: "Timo Stollenwerk",
     };
-  }
-
-  handleShow() {
-    this.setState({
-      showModal: true,
-    });
-  }
-
-  handleClose() {
-    this.setState({
-      showModal: false,
-    });
   }
 
   render() {
     return (
       <div className="Container">
         <div className="Floor">
-          <Room RoomNumber="One" RoomName="Bonn" onClick={this.handleShow} />
+          <Room
+            RoomNumber="One"
+            roomTitle="Bonn"
+            roomName={this.state.roomName}
+            userFullName={this.state.userFullName}
+          />
           <div className="Room Two" />
-          <Room RoomNumber="Three" RoomName="Barcelona" />
+          <Room
+            RoomNumber="Three"
+            roomTitle="Barcelona"
+            roomName={this.state.roomName}
+            userFullName={this.state.userFullName}
+          />
           <div className="Room Four" />
           <div className="Room Five" />
           <div className="Room Six" />
-          <Room RoomNumber="Seven" RoomName="Berlin" />
+          <Room
+            RoomNumber="Seven"
+            roomTitle="Berlin"
+            roomName={this.state.roomName}
+            userFullName={this.state.userFullName}
+          />
           <div className="Room Eight" />
-          <Room RoomNumber="Nine" RoomName="London" />
+          <Room
+            RoomNumber="Nine"
+            roomTitle="London"
+            roomName={this.state.roomName}
+            userFullName={this.state.userFullName}
+          />
         </div>
       </div>
     );
