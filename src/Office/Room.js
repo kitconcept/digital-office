@@ -30,7 +30,7 @@ class Room extends React.Component {
         <CallModal
           show={this.state.modalShow}
           onHide={this.handleHide}
-          roomTitle={"Oslo"}
+          roomTitle={this.props.roomTitle}
           roomName={this.props.roomName}
           userFullName={this.props.userFullName}
         />

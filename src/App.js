@@ -11,14 +11,6 @@ function App() {
   return (
     <div className="App">
       <Office />
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Jitsi
-          roomName={roomName}
-          displayName={userFullName}
-          config={{ prejoinPageEnabled: false }}
-        />
-      </header> */}
     </div>
   );
 }
