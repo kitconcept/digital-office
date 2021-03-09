@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from "react";
 import Room from "./Room.js";
+import RoomList from "./RoomList";
 import "../App.css";
 
 const Office = () => {
-  const [AvatarSelector, setAvatarSelector] = useState(5);
-  const roomName =
-    "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000";
+  //User Name for the jitsi Call
   const userFullName = "Thomas Kindermann";
+  //state for keeping track of the Avatar Position
+  const [AvatarPosition, setAvatarPosition] = useState(5);
+  //calling KeyPress Hook for Arrow Keys
   const ArrowUp = useKeyPress("ArrowUp");
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
 
+  //Movement of the Avatar via AvatarPosition in 3x3 grid
   useEffect(() => {
-    console.log(AvatarSelector);
-    if (ArrowUp && AvatarSelector > 3) {
-      setAvatarSelector(AvatarSelector - 3);
+    // Avatar moves Up if the Position does not equal first row
+    if (ArrowUp && AvatarPosition > 3) {
+      setAvatarPosition(AvatarPosition - 3);
     }
-    if (ArrowDown && AvatarSelector < 6) {
-      setAvatarSelector(AvatarSelector + 3);
+    // Avatar moves down if the Position does not equal last row
+    if (ArrowDown && AvatarPosition < 7) {
+      setAvatarPosition(AvatarPosition + 3);
     }
-    if (ArrowRight && AvatarSelector < 9) {
-      setAvatarSelector(AvatarSelector + 1);
+    // Avatar moves right if the Position does not equal last column
+    if (ArrowRight && AvatarPosition % 3 !== 0) {
+      setAvatarPosition(AvatarPosition + 1);
     }
-    if (ArrowLeft && AvatarSelector > 1) {
-      setAvatarSelector(AvatarSelector - 1);
+    // Avatar moves left if the Position does not equal first column
+    if (ArrowLeft && AvatarPosition % 3 !== 1) {
+      setAvatarPosition(AvatarPosition - 1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft]);
@@ -32,83 +38,42 @@ const Office = () => {
   return (
     <div className="Container">
       <div className="Floor">
-        <Room
-          RoomNumber={1}
-          roomTitle="Bonn"
-          roomName={roomName}
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={2}
-          roomTitle=""
-          roomName=""
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={3}
-          roomTitle="Barcelona"
-          roomName={roomName}
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={4}
-          roomTitle=""
-          roomName=""
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={5}
-          roomTitle=""
-          roomName=""
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={6}
-          roomTitle=""
-          roomName=""
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={7}
-          roomTitle="Berlin"
-          roomName={roomName}
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={8}
-          roomTitle=""
-          roomName=""
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
-        <Room
-          RoomNumber={9}
-          roomTitle="London"
-          roomName={roomName}
-          userFullName={userFullName}
-          AvatarSelector={AvatarSelector}
-        />
+        {createRooms(RoomList, AvatarPosition, userFullName)}
       </div>
     </div>
   );
 };
 
+//Create Array Of Rooms for Office Render
+function createRooms(roomList, AvatarPosition, userFullName) {
+  let Rooms = [];
+  for (let i = 0; i < 9; i++) {
+    Rooms.push(
+      <Room
+        RoomNumber={i + 1}
+        roomTitle={roomList[i].title}
+        roomName={roomList[i].name}
+        userFullName={userFullName}
+        AvatarSelector={AvatarPosition}
+      />
+    );
+  }
+  return Rooms;
+}
+
+//KeyPress Hook
 function useKeyPress(targetKey) {
+  // State for keeping track of whether key is pressed
   const [keyPressed, setKeyPressed] = useState(false);
 
+  // If pressed key is target key then set to true
   function downHandler({ key }) {
     if (key === targetKey) {
       setKeyPressed(true);
     }
   }
 
+  // If released key is trget key then set to false
   const upHandler = ({ key }) => {
     if (key === targetKey) {
       if (key === targetKey) {
@@ -117,14 +82,17 @@ function useKeyPress(targetKey) {
     }
   };
 
+  // Add event listeners
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
 
+    // Remove event listeners on cleanup
     return () => {
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return keyPressed;

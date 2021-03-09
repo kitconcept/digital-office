@@ -13,8 +13,14 @@ class Room extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.RoomNumber === this.props.AvatarSelector) {
+      this.handleShow();
+    }
+  }
+
   handleShow() {
-    if (this.props.roomName != "")
+    if (this.props.roomName !== "")
       this.setState({
         modalShow: true,
       });
