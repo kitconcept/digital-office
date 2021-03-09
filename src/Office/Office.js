@@ -13,19 +13,21 @@ const Office = () => {
   const ArrowRight = useKeyPress("ArrowRight");
 
   useEffect(() => {
-    if (ArrowUp) {
-      console.log("ArrowUp");
+    console.log(AvatarSelector);
+    if (ArrowUp && AvatarSelector > 3) {
+      setAvatarSelector(AvatarSelector - 3);
     }
-    if (ArrowDown) {
-      console.log("ArrowDown");
+    if (ArrowDown && AvatarSelector < 6) {
+      setAvatarSelector(AvatarSelector + 3);
     }
-    if (ArrowRight) {
-      console.log("ArrowRight");
+    if (ArrowRight && AvatarSelector < 9) {
+      setAvatarSelector(AvatarSelector + 1);
     }
-    if (ArrowLeft) {
-      console.log("ArrowLeft");
+    if (ArrowLeft && AvatarSelector > 1) {
+      setAvatarSelector(AvatarSelector - 1);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft]);
 
   return (
     <div className="Container">
