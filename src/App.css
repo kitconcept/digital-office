@@ -63,39 +63,39 @@
   text-align: center;
 }
 
-.One {
+.Number1 {
   grid-column-start: 1;
   grid-row-start: 1;
 }
-.Two {
+.Number2 {
   grid-column-start: 2;
   grid-row-start: 1;
 }
-.Three {
+.Number3 {
   grid-column-start: 3;
   grid-row-start: 1;
 }
-.Four {
+.Number4 {
   grid-column-start: 1;
   grid-row-start: 2;
 }
-.Five {
+.Number5 {
   grid-column-start: 2;
   grid-row-start: 2;
 }
-.Six {
+.Number6 {
   grid-column-start: 3;
   grid-row-start: 2;
 }
-.Seven {
+.Number7 {
   grid-column-start: 1;
   grid-row-start: 3;
 }
-.Eight {
+.Number8 {
   grid-column-start: 2;
   grid-row-start: 3;
 }
-.Nine {
+.Number9 {
   grid-column-start: 3;
   grid-row-start: 3;
 }
@@ -103,4 +103,27 @@
 .modal-dialog.modal-customWidth {
   width: 835px;
   max-width: 900px;
+}
+
+.Avatar {
+  width: 30%;
+  height: 30%;
+  background: yellow;
+  position: relative;
+  top: 30%;
+  left: 35%;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  text-align: center;
+  box-shadow: inset 0 0 15px #333;
+  padding-top: 4%;
+}
+.Avatar.Hidden {
+  visibility: hidden;
+}
+
+.RoomTitle {
+  height: 24px;
 }
