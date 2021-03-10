@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Room from "./Room.js";
 import Button from "react-bootstrap/Button";
+import ColorPickerModal from "./ColorPickerModal.js";
 import NameChangeModal from "./NameChangeModal.js";
 import RoomList from "./RoomList";
 import "../App.css";
@@ -16,13 +17,23 @@ const Office = () => {
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
   const EnterKey = useKeyPress("Enter");
-  // Modal State ************
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // Modal State for Name Change
+  const [showNameChange, setShowNameChange] = useState(false);
+  const handleCloseNameChange = () => setShowNameChange(false);
+  const handleShowNameChange = () => setShowNameChange(true);
+  // Save the changed Name in userFullName
   const nameSubmit = (firstname, lastname) => {
     if (firstname !== "") setUserFullName(firstname + " " + lastname);
-    handleClose();
+    handleCloseNameChange();
+  };
+  // Modal State for ColorPicker
+  const [showColorPicker, setShowColorPicker] = useState(false);
+  const handleCloseColorPicker = () => setShowColorPicker(false);
+  const handleShowColorPicker = () => setShowColorPicker(true);
+  const [AvatarColor, setAvatarColor] = useState("Color White");
+  const colorSubmit = (newColor) => {
+    setAvatarColor(newColor);
+    setShowColorPicker(false);
   };
 
   //Movement of the Avatar via AvatarPosition in 3x3 grid
@@ -46,31 +57,42 @@ const Office = () => {
     <>
       <div className="Container">
         <div className="NavBar">
-          <Button onClick={handleShow} className="NameChange Button">
+          <Button onClick={handleShowNameChange} className="NameChange Button">
             Change Name
           </Button>
           <div className="UserName">
             User Name:
             <br /> {userFullName}
           </div>
-          <Button className="ColorChange Button">Change Color</Button>
+          <Button
+            onClick={handleShowColorPicker}
+            className="ColorChange Button"
+          >
+            Change Color
+          </Button>
         </div>
         <div className="Floor">
-          {createRooms(RoomList, AvatarPosition, userFullName)}
+          {createRooms(RoomList, AvatarPosition, AvatarColor, userFullName)}
         </div>
       </div>
       <NameChangeModal
-        show={show}
-        handleClose={handleClose}
+        show={showNameChange}
+        handleClose={handleCloseNameChange}
         nameSubmit={nameSubmit}
         EnterKey={EnterKey}
+      />
+      <ColorPickerModal
+        colorSubmit={colorSubmit}
+        userFullName={userFullName}
+        show={showColorPicker}
+        handleClose={handleCloseColorPicker}
       />
     </>
   );
 };
 
 //Create Array Of Rooms for Office Render
-function createRooms(roomList, AvatarPosition, userFullName) {
+function createRooms(roomList, AvatarPosition, AvatarColor, userFullName) {
   let Rooms = [];
   for (let i = 0; i < 9; i++) {
     Rooms.push(
@@ -81,6 +103,7 @@ function createRooms(roomList, AvatarPosition, userFullName) {
         roomName={roomList[i].name}
         userFullName={userFullName}
         AvatarSelector={AvatarPosition}
+        AvatarColor={AvatarColor}
       />
     );
   }

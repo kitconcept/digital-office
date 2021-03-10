@@ -29,7 +29,9 @@ const Room = (props) => {
         {
           //only returning Avatar if its present in the Room
           props.RoomNumber === props.AvatarSelector && (
-            <div className="Avatar">{props.userFullName.charAt(0)}</div>
+            <div className={"Avatar " + props.AvatarColor}>
+              {props.userFullName.charAt(0)}
+            </div>
           )
         }
       </div>
