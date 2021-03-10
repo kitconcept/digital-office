@@ -7,13 +7,16 @@ const Room = (props) => {
   const [modalShow, setModalShow] = useState(false);
   //creating className for Room position in CSS
   const RoomNumber = "Room Number" + props.RoomNumber;
+  // Show and Hide Handlers for CallModal
+  const handleShow = () => setModalShow(true);
+  const handleHide = () => setModalShow(false);
 
   //checking if the Avatar is in the current Room
   useEffect(() => {
     if (props.RoomNumber === props.AvatarSelector) {
-      setModalShow(true);
+      handleShow();
     } else {
-      setModalShow(false);
+      handleHide();
     }
   }, [props.RoomNumber, props.AvatarSelector]);
 
@@ -36,7 +39,7 @@ const Room = (props) => {
         props.roomName !== "" && (
           <CallModal
             show={modalShow}
-            onHide={() => setModalShow(false)}
+            onHide={handleHide}
             roomTitle={props.roomTitle}
             roomName={props.roomName}
             userFullName={props.userFullName}

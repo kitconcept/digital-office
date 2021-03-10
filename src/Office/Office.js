@@ -1,34 +1,41 @@
 import React, { useState, useEffect } from "react";
 import Room from "./Room.js";
+import Button from "react-bootstrap/Button";
+import NameChangeModal from "./NameChangeModal.js";
 import RoomList from "./RoomList";
 import "../App.css";
 
 const Office = () => {
   //User Name for the jitsi Call
-  const userFullName = "Thomas Kindermann";
+  const [userFullName, setUserFullName] = useState("Thomas Kindermann");
   //state for keeping track of the Avatar Position
   const [AvatarPosition, setAvatarPosition] = useState(5);
-  //calling KeyPress Hook for Arrow Keys
+  //calling KeyPress Hooks
   const ArrowUp = useKeyPress("ArrowUp");
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
+  const EnterKey = useKeyPress("Enter");
+  // Modal State ************
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const nameSubmit = (firstname, lastname) => {
+    if (firstname !== "") setUserFullName(firstname + " " + lastname);
+    handleClose();
+  };
 
   //Movement of the Avatar via AvatarPosition in 3x3 grid
   useEffect(() => {
-    // Avatar moves Up if the Position does not equal first row
     if (ArrowUp && AvatarPosition > 3) {
       setAvatarPosition(AvatarPosition - 3);
     }
-    // Avatar moves down if the Position does not equal last row
     if (ArrowDown && AvatarPosition < 7) {
       setAvatarPosition(AvatarPosition + 3);
     }
-    // Avatar moves right if the Position does not equal last column
     if (ArrowRight && AvatarPosition % 3 !== 0) {
       setAvatarPosition(AvatarPosition + 1);
     }
-    // Avatar moves left if the Position does not equal first column
     if (ArrowLeft && AvatarPosition % 3 !== 1) {
       setAvatarPosition(AvatarPosition - 1);
     }
@@ -36,11 +43,29 @@ const Office = () => {
   }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft]);
 
   return (
-    <div className="Container">
-      <div className="Floor">
-        {createRooms(RoomList, AvatarPosition, userFullName)}
+    <>
+      <div className="Container">
+        <div className="NavBar">
+          <Button onClick={handleShow} className="NameChange Button">
+            Change Name
+          </Button>
+          <div className="UserName">
+            User Name:
+            <br /> {userFullName}
+          </div>
+          <Button className="ColorChange Button">Change Color</Button>
+        </div>
+        <div className="Floor">
+          {createRooms(RoomList, AvatarPosition, userFullName)}
+        </div>
       </div>
-    </div>
+      <NameChangeModal
+        show={show}
+        handleClose={handleClose}
+        nameSubmit={nameSubmit}
+        EnterKey={EnterKey}
+      />
+    </>
   );
 };
 
@@ -50,6 +75,7 @@ function createRooms(roomList, AvatarPosition, userFullName) {
   for (let i = 0; i < 9; i++) {
     Rooms.push(
       <Room
+        key={i}
         RoomNumber={i + 1}
         roomTitle={roomList[i].title}
         roomName={roomList[i].name}

@@ -45,6 +45,27 @@
   height: 100vh;
   width: 100vw;
 }
+.NavBar {
+  grid-column-start: 2;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: auto 190px auto;
+}
+
+.Button {
+  height: 45px;
+  grid-row-start: 2;
+}
+.NameChange {
+  grid-column-start: 1;
+}
+.ColorChange {
+  grid-column-start: 3;
+}
+.UserName {
+  grid-column-start: 2;
+  grid-row-start: 2;
+}
 
 .Floor {
   background-color: grey;
