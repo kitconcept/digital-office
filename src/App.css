@@ -42,7 +42,6 @@
   max-width: 900px;
 }
 
-/* 
 .modal-body.ColorPicker {
   display: flex;
 }
@@ -114,4 +113,3 @@
 .Color.White:hover {
   background-color: rgb(196, 196, 196);
 }
-*/

@@ -9,7 +9,7 @@ const RoomList = [
     left: 19,
     top: 20,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
-    title: "Küche",
+    title: "Kitchen",
   },
 
   {
@@ -18,7 +18,7 @@ const RoomList = [
     left: 19,
     top: 357,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440001",
-    title: "Konferenzraum",
+    title: "Meeting-Room",
   },
 
   {

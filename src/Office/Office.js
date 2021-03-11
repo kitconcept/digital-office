@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Room from "./Room.js";
-import ColorPickerModal from "./ColorPickerModal.js";
 import RoomList from "./RoomList";
 import Options from "./Options.js";
 import "../App.css";
@@ -17,6 +16,10 @@ const Office = () => {
   const [userFullName, setUserFullName] = useState("Thomas Kindermann");
   const nameSubmit = (firstname, lastname) => {
     if (firstname !== "") setUserFullName(firstname + " " + lastname);
+  };
+  const [Avatar, setAvatar] = useState("Avatar Color Yellow");
+  const colorSubmit = (color) => {
+    setAvatar("Avatar " + color);
   };
 
   useEffect(() => {
@@ -46,9 +49,10 @@ const Office = () => {
       <Options
         userFullName={userFullName}
         nameSubmit={nameSubmit}
+        colorSubmit={colorSubmit}
         EnterKey={EnterKey}
       />
-      <div className="Avatar" style={{ top: top, left: left }}>
+      <div className={Avatar} style={{ top: top, left: left }}>
         {userFullName.charAt(0)}
       </div>
     </div>
