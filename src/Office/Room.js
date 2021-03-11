@@ -5,37 +5,36 @@ import "../App.css";
 const Room = (props) => {
   //state for showing jitsi Call in a Modal
   const [modalShow, setModalShow] = useState(false);
-  //creating className for Room position in CSS
-  const RoomNumber = "Room Number" + props.RoomNumber;
-  // Show and Hide Handlers for CallModal
   const handleShow = () => setModalShow(true);
   const handleHide = () => setModalShow(false);
 
-  //checking if the Avatar is in the current Room
-  useEffect(() => {
-    if (props.RoomNumber === props.AvatarSelector) {
-      handleShow();
-    } else {
-      handleHide();
-    }
-  }, [props.RoomNumber, props.AvatarSelector]);
+  const insideRoomFlag = useAvatarPositionCheck(
+    props.avatarPosition,
+    props.left,
+    props.top,
+    props.width,
+    props.height
+  );
 
-  // return the Office room
+  useEffect(() => {
+    if (insideRoomFlag) {
+      handleShow();
+    } else handleHide();
+  }, [insideRoomFlag]);
+
   return (
     <>
-      <div className={RoomNumber}>
-        <div className="RoomTitle">{props.roomTitle}</div>
-
-        {
-          //only returning Avatar if its present in the Room
-          props.RoomNumber === props.AvatarSelector && (
-            <div className={"Avatar " + props.AvatarColor}>
-              {props.userFullName.charAt(0)}
-            </div>
-          )
-        }
+      <div
+        className="Room"
+        style={{
+          width: props.width,
+          height: props.height,
+          top: props.top,
+          left: props.left,
+        }}
+      >
+        {props.roomTitle}
       </div>
-
       {
         //only return jitsi Call-modal if the room has a Call set up
         props.roomName !== "" && (
@@ -51,5 +50,25 @@ const Room = (props) => {
     </>
   );
 };
+
+function useAvatarPositionCheck(avatarPosition, left, top, width, height) {
+  const [positionCheck, setPositionCheck] = useState(false);
+
+  useEffect(() => {
+    if (
+      avatarPosition[0] > left &&
+      avatarPosition[0] < left + width - 40 &&
+      avatarPosition[1] > top &&
+      avatarPosition[1] < top + height - 40
+    ) {
+      setPositionCheck(true);
+    } else {
+      setPositionCheck(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [avatarPosition]);
+
+  return positionCheck;
+}
 
 export default Room;

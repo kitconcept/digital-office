@@ -4,40 +4,39 @@
 
 const RoomList = [
   {
+    width: 214,
+    height: 328,
+    left: 19,
+    top: 20,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
-    title: "Bonn",
+    title: "Küche",
   },
+
   {
-    name: "",
-    title: "",
-  },
-  {
+    width: 214,
+    height: 274,
+    left: 19,
+    top: 357,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440001",
-    title: "Barcelona",
+    title: "Konferenzraum",
   },
+
   {
-    name: "",
-    title: "",
-  },
-  {
-    name: "",
-    title: "",
-  },
-  {
-    name: "",
-    title: "",
-  },
-  {
+    width: 103,
+    height: 108,
+    left: 372,
+    top: 275,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440002",
-    title: "Oslo",
+    title: "Desk 1",
   },
+
   {
-    name: "",
-    title: "",
-  },
-  {
+    width: 104,
+    height: 108,
+    left: 484,
+    top: 275,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440003",
-    title: "London",
+    title: "Desk 2",
   },
 ];
 

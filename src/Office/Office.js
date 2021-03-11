@@ -1,116 +1,82 @@
 import React, { useState, useEffect } from "react";
 import Room from "./Room.js";
-import Button from "react-bootstrap/Button";
 import ColorPickerModal from "./ColorPickerModal.js";
-import NameChangeModal from "./NameChangeModal.js";
 import RoomList from "./RoomList";
+import Options from "./Options.js";
 import "../App.css";
 
 const Office = () => {
-  //User Name for the jitsi Call
-  const [userFullName, setUserFullName] = useState("Thomas Kindermann");
-  //state for keeping track of the Avatar Position
-  const [AvatarPosition, setAvatarPosition] = useState(5);
-  //calling KeyPress Hooks
+  const windowDimensions = useWindowResize();
+  const [top, setTop] = useState(60);
+  const [left, setLeft] = useState(600);
   const ArrowUp = useKeyPress("ArrowUp");
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
   const EnterKey = useKeyPress("Enter");
-  // Modal State for Name Change
-  const [showNameChange, setShowNameChange] = useState(false);
-  const handleCloseNameChange = () => setShowNameChange(false);
-  const handleShowNameChange = () => setShowNameChange(true);
-  // Save the changed Name in userFullName
+  const [userFullName, setUserFullName] = useState("Thomas Kindermann");
   const nameSubmit = (firstname, lastname) => {
     if (firstname !== "") setUserFullName(firstname + " " + lastname);
-    handleCloseNameChange();
-  };
-  // Modal State for ColorPicker
-  const [showColorPicker, setShowColorPicker] = useState(false);
-  const handleCloseColorPicker = () => setShowColorPicker(false);
-  const handleShowColorPicker = () => setShowColorPicker(true);
-  const [AvatarColor, setAvatarColor] = useState("Color White");
-  const colorSubmit = (newColor) => {
-    setAvatarColor(newColor);
-    setShowColorPicker(false);
   };
 
-  //Movement of the Avatar via AvatarPosition in 3x3 grid
   useEffect(() => {
-    if (ArrowUp && AvatarPosition > 3) {
-      setAvatarPosition(AvatarPosition - 3);
-    }
-    if (ArrowDown && AvatarPosition < 7) {
-      setAvatarPosition(AvatarPosition + 3);
-    }
-    if (ArrowRight && AvatarPosition % 3 !== 0) {
-      setAvatarPosition(AvatarPosition + 1);
-    }
-    if (ArrowLeft && AvatarPosition % 3 !== 1) {
-      setAvatarPosition(AvatarPosition - 1);
-    }
+    const interval = setInterval(() => {
+      if (ArrowUp && top > 20) {
+        setTop(top - 1);
+      }
+      if (ArrowDown && top < windowDimensions[0]) {
+        setTop(top + 1);
+      }
+      if (ArrowRight && left < windowDimensions[1]) {
+        setLeft(left + 1);
+      }
+      if (ArrowLeft && left > 19) {
+        setLeft(left - 1);
+      }
+    }, 2);
+    return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft]);
+  }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft, left, top]);
 
   return (
-    <>
-      <div className="Container">
-        <div className="NavBar">
-          <Button onClick={handleShowNameChange} className="NameChange Button">
-            Change Name
-          </Button>
-          <div className="UserName">
-            User Name:
-            <br /> {userFullName}
-          </div>
-          <Button
-            onClick={handleShowColorPicker}
-            className="ColorChange Button"
-          >
-            Change Color
-          </Button>
-        </div>
-        <div className="Floor">
-          {createRooms(RoomList, AvatarPosition, AvatarColor, userFullName)}
-        </div>
+    <div className="Container">
+      <div className="Office">
+        {createRooms(RoomList, [left, top], userFullName)}
       </div>
-      <NameChangeModal
-        show={showNameChange}
-        handleClose={handleCloseNameChange}
+      <Options
+        userFullName={userFullName}
         nameSubmit={nameSubmit}
         EnterKey={EnterKey}
       />
-      <ColorPickerModal
-        colorSubmit={colorSubmit}
-        userFullName={userFullName}
-        show={showColorPicker}
-        handleClose={handleCloseColorPicker}
-      />
-    </>
+      <div className="Avatar" style={{ top: top, left: left }}>
+        {userFullName.charAt(0)}
+      </div>
+    </div>
   );
 };
 
-//Create Array Of Rooms for Office Render
-function createRooms(roomList, AvatarPosition, AvatarColor, userFullName) {
+// //Create Array Of Rooms for Office Render
+function createRooms(roomList, avatarPosition, userFullName) {
   let Rooms = [];
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < roomList.length; i++) {
     Rooms.push(
       <Room
         key={i}
-        RoomNumber={i + 1}
+        width={roomList[i].width}
+        height={roomList[i].height}
+        left={roomList[i].left}
+        top={roomList[i].top}
         roomTitle={roomList[i].title}
         roomName={roomList[i].name}
         userFullName={userFullName}
-        AvatarSelector={AvatarPosition}
-        AvatarColor={AvatarColor}
+        avatarPosition={avatarPosition}
       />
     );
   }
   return Rooms;
 }
 
-//KeyPress Hook
+//Key Press Hook
 function useKeyPress(targetKey) {
   // State for keeping track of whether key is pressed
   const [keyPressed, setKeyPressed] = useState(false);
@@ -130,7 +96,6 @@ function useKeyPress(targetKey) {
       }
     }
   };
-
   // Add event listeners
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
@@ -145,6 +110,28 @@ function useKeyPress(targetKey) {
   }, []);
 
   return keyPressed;
+}
+
+//Window Resize Hook
+function useWindowResize() {
+  const [maxWindwoWidth, setMaxWindowWidth] = useState(
+    window.innerWidth - (window.innerWidth - 818) - 41
+  );
+  const [maxWindowHeight, setMaxWindowHeight] = useState(
+    window.innerHeight - (window.innerHeight - 632) - 40
+  );
+  function ResizeHandler() {
+    setMaxWindowWidth(window.innerWidth - (window.innerWidth - 818) - 41);
+    setMaxWindowHeight(window.innerHeight - (window.innerHeight - 632) - 40);
+  }
+  useEffect(() => {
+    window.addEventListener("resize", ResizeHandler);
+    return () => {
+      window.removeEventListener("resize", ResizeHandler);
+    };
+  }, []);
+
+  return [maxWindowHeight, maxWindwoWidth];
 }
 
 export default Office;
