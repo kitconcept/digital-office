@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./NewOffice.css";
 import NewRoom from "./NewRoom.js";
+import Options from "./Options.js";
 
 const NewOffice = () => {
   const windowDimensions = useWindowResize();
@@ -10,6 +11,11 @@ const NewOffice = () => {
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
+  const EnterKey = useKeyPress("Enter");
+  const [userFullName, setUserFullName] = useState("Thomas Kindermann");
+  const nameSubmit = (firstname, lastname) => {
+    if (firstname !== "") setUserFullName(firstname + " " + lastname);
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -56,8 +62,13 @@ const NewOffice = () => {
           avatarPosition={[left, top]}
         />
       </div>
+      <Options
+        userFullName={userFullName}
+        nameSubmit={nameSubmit}
+        EnterKey={EnterKey}
+      />
       <div className="NewAvatar" style={{ top: top, left: left }}>
-        {left},{top}
+        {userFullName.charAt(0)}
       </div>
     </div>
   );
