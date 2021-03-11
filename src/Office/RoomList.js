@@ -12,7 +12,7 @@ const RoomList = [
     title: "",
   },
   {
-    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
+    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440001",
     title: "Barcelona",
   },
   {
@@ -28,7 +28,7 @@ const RoomList = [
     title: "",
   },
   {
-    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
+    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440002",
     title: "Oslo",
   },
   {
@@ -36,7 +36,7 @@ const RoomList = [
     title: "",
   },
   {
-    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
+    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440003",
     title: "London",
   },
 ];
