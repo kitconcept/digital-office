@@ -1,4 +1,4 @@
-import Office from "./Office/Office.js";
+//import Office from "./Office/Office.js";
 import NewOffice from "./NewOffice/NewOffice.js";
 
 function App() {

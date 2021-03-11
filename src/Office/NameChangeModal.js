@@ -5,9 +5,9 @@ const NameChangeModal = (props) => {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const inputEl = useRef(null);
-  const setInputFocus = () => {
-    inputEl.current.focus();
-  };
+  // const setInputFocus = () => {
+  //   inputEl.current.focus();
+  // };
 
   useEffect(() => {
     if (props.EnterKey) {

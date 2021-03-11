@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Jitsi from "react-jitsi";
 import "../App.css";
 
 const CallModal = (props) => {
-  useEffect(() => {});
   return (
     <Modal
       {...props}

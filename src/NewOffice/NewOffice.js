@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./NewOffice.css";
+import NewRoom from "./NewRoom.js";
 
 const NewOffice = () => {
   const windowDimensions = useWindowResize();
@@ -31,7 +32,30 @@ const NewOffice = () => {
 
   return (
     <div className="NewContainer">
-      <div className="NewOffice"></div>
+      <div className="NewOffice">
+        <NewRoom
+          width={214}
+          height={328}
+          left={19}
+          top={20}
+          avatarPosition={[left, top]}
+        />
+        <NewRoom
+          width={214}
+          height={274}
+          left={19}
+          top={357}
+          avatarPosition={[left, top]}
+        />
+
+        <NewRoom
+          width={103}
+          height={108}
+          left={372}
+          top={275}
+          avatarPosition={[left, top]}
+        />
+      </div>
       <div className="NewAvatar" style={{ top: top, left: left }}>
         {left},{top}
       </div>

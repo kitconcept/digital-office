@@ -1,5 +1,3 @@
-.NewContainer {
-}
 .NewOffice {
   background-image: url("../assets/OfficeFloor.PNG");
   width: 818px;
@@ -20,4 +18,9 @@
   border-radius: 50%;
   text-align: center;
   box-shadow: inset 0 0 15px #333;
+}
+
+.NewRoom {
+  position: absolute;
+  opacity: 60%;
 }
