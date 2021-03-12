@@ -20,7 +20,7 @@ const Office = () => {
   const EnterKey = useKeyPress("Enter");
 
   // User Name State
-  const [userFullName, setUserFullName] = useState("Thomas Kindermann");
+  const [userFullName, setUserFullName] = useState("John Doe");
   const nameSubmit = (firstname, lastname) => {
     if (firstname !== "") setUserFullName(firstname + " " + lastname);
   };
