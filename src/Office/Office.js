@@ -17,6 +17,10 @@ const Office = () => {
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
+  const wKey = useKeyPress("w");
+  const aKey = useKeyPress("a");
+  const sKey = useKeyPress("s");
+  const dKey = useKeyPress("d");
   const EnterKey = useKeyPress("Enter");
 
   // User Name State
@@ -33,22 +37,33 @@ const Office = () => {
   // Avatar Movement with Arrow Keys
   useEffect(() => {
     const interval = setInterval(() => {
-      if (ArrowUp && top > 21) {
+      if (ArrowUp | wKey && top > 21) {
         setTop(top - 1);
       }
-      if (ArrowDown && top < windowDimensions[0]) {
+      if (ArrowDown | sKey && top < windowDimensions[0]) {
         setTop(top + 1);
       }
-      if (ArrowRight && left < windowDimensions[1]) {
+      if (ArrowRight | dKey && left < windowDimensions[1]) {
         setLeft(left + 1);
       }
-      if (ArrowLeft && left > 21) {
+      if (ArrowLeft | aKey && left > 21) {
         setLeft(left - 1);
       }
     }, 2);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft, left, top]);
+  }, [
+    ArrowUp,
+    ArrowDown,
+    ArrowRight,
+    ArrowLeft,
+    wKey,
+    aKey,
+    sKey,
+    dKey,
+    left,
+    top,
+  ]);
 
   return (
     <div className="Container">
