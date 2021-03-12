@@ -1,7 +1,7 @@
 .Office {
   background-image: url("./assets/OfficeFloor.PNG");
-  width: 818px;
-  height: 632px;
+  width: 958px;
+  height: 742px;
   margin: 10px;
 }
 
@@ -22,14 +22,11 @@
   box-shadow: inset 0 0 15px #333;
 }
 
-.Wall {
-  position: absolute;
-  background-color: yellow;
-  opacity: 70%;
-}
 .Room {
   position: absolute;
   text-align: center;
+  border-style: dotted;
+  padding: 5px;
 }
 
 .Options {

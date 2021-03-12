@@ -9,38 +9,29 @@
 const RoomList = [
   {
     width: 214,
-    height: 328,
-    left: 19,
-    top: 20,
+    height: 248,
+    left: 248,
+    top: 22,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
-    title: "Kitchen",
+    title: "Green Table",
   },
 
   {
-    width: 214,
-    height: 274,
-    left: 19,
-    top: 357,
+    width: 232,
+    height: 396,
+    left: 665,
+    top: 85,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440001",
-    title: "Meeting-Room",
+    title: "Red-Table",
   },
 
   {
-    width: 103,
-    height: 108,
-    left: 372,
-    top: 275,
+    width: 280,
+    height: 208,
+    left: 105,
+    top: 457,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440002",
-    title: "Desk 1",
-  },
-
-  {
-    width: 104,
-    height: 108,
-    left: 484,
-    top: 275,
-    name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440003",
-    title: "Desk 2",
+    title: "Yellow Table",
   },
 ];
 

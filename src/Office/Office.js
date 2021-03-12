@@ -33,7 +33,7 @@ const Office = () => {
   // Avatar Movement with Arrow Keys
   useEffect(() => {
     const interval = setInterval(() => {
-      if (ArrowUp && top > 20) {
+      if (ArrowUp && top > 21) {
         setTop(top - 1);
       }
       if (ArrowDown && top < windowDimensions[0]) {
@@ -42,7 +42,7 @@ const Office = () => {
       if (ArrowRight && left < windowDimensions[1]) {
         setLeft(left + 1);
       }
-      if (ArrowLeft && left > 19) {
+      if (ArrowLeft && left > 21) {
         setLeft(left - 1);
       }
     }, 2);
@@ -128,18 +128,18 @@ function useKeyPress(targetKey) {
 function useWindowResize() {
   // MaxWidth equals to the office Width minus Avatar Diameter
   const [maxWindwoWidth, setMaxWindowWidth] = useState(
-    window.innerWidth - (window.innerWidth - 818) - 41
+    window.innerWidth - (window.innerWidth - 958) - 38
   );
 
   //MaxHeight equals to the office height minus avatar diameter
   const [maxWindowHeight, setMaxWindowHeight] = useState(
-    window.innerHeight - (window.innerHeight - 632) - 40
+    window.innerHeight - (window.innerHeight - 742) - 41
   );
 
   //Changes MaxWidth / MaxHeight on Windowresize
   function ResizeHandler() {
-    setMaxWindowWidth(window.innerWidth - (window.innerWidth - 818) - 41);
-    setMaxWindowHeight(window.innerHeight - (window.innerHeight - 632) - 40);
+    setMaxWindowWidth(window.innerWidth - (window.innerWidth - 958) - 38);
+    setMaxWindowHeight(window.innerHeight - (window.innerHeight - 742) - 41);
   }
   useEffect(() => {
     window.addEventListener("resize", ResizeHandler);
