@@ -9,8 +9,8 @@ const Office = () => {
   const windowDimensions = useWindowResize();
 
   // Position of Avatar
-  const [left, setLeft] = useState(600);
-  const [top, setTop] = useState(60);
+  const [left, setLeft] = useState(500);
+  const [top, setTop] = useState(500);
 
   // Calling Key Listener Hook
   const ArrowUp = useKeyPress("ArrowUp");
