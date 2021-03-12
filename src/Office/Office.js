@@ -5,23 +5,32 @@ import Options from "./Options.js";
 import "../App.css";
 
 const Office = () => {
+  //Calling Window Resize Hook
   const windowDimensions = useWindowResize();
-  const [top, setTop] = useState(60);
+
+  // Position of Avatar
   const [left, setLeft] = useState(600);
+  const [top, setTop] = useState(60);
+
+  // Calling Key Listener Hook
   const ArrowUp = useKeyPress("ArrowUp");
   const ArrowDown = useKeyPress("ArrowDown");
   const ArrowLeft = useKeyPress("ArrowLeft");
   const ArrowRight = useKeyPress("ArrowRight");
   const EnterKey = useKeyPress("Enter");
+
+  // User Name State
   const [userFullName, setUserFullName] = useState("Thomas Kindermann");
   const nameSubmit = (firstname, lastname) => {
     if (firstname !== "") setUserFullName(firstname + " " + lastname);
   };
+
+  // Avatar Color State
   const [Avatar, setAvatar] = useState("Avatar Color Yellow");
   const colorSubmit = (color) => {
     setAvatar("Avatar " + color);
   };
-
+  // Avatar Movement with Arrow Keys
   useEffect(() => {
     const interval = setInterval(() => {
       if (ArrowUp && top > 20) {
@@ -59,7 +68,7 @@ const Office = () => {
   );
 };
 
-// //Create Array Of Rooms for Office Render
+// Create Array Of Rooms for Office Render
 function createRooms(roomList, avatarPosition, userFullName) {
   let Rooms = [];
   for (let i = 0; i < roomList.length; i++) {
@@ -100,12 +109,11 @@ function useKeyPress(targetKey) {
       }
     }
   };
-  // Add event listeners
+
   useEffect(() => {
     window.addEventListener("keydown", downHandler);
     window.addEventListener("keyup", upHandler);
 
-    // Remove event listeners on cleanup
     return () => {
       window.removeEventListener("keydown", downHandler);
       window.removeEventListener("keyup", upHandler);
@@ -118,12 +126,17 @@ function useKeyPress(targetKey) {
 
 //Window Resize Hook
 function useWindowResize() {
+  // MaxWidth equals to the office Width minus Avatar Diameter
   const [maxWindwoWidth, setMaxWindowWidth] = useState(
     window.innerWidth - (window.innerWidth - 818) - 41
   );
+
+  //MaxHeight equals to the office height minus avatar diameter
   const [maxWindowHeight, setMaxWindowHeight] = useState(
     window.innerHeight - (window.innerHeight - 632) - 40
   );
+
+  //Changes MaxWidth / MaxHeight on Windowresize
   function ResizeHandler() {
     setMaxWindowWidth(window.innerWidth - (window.innerWidth - 818) - 41);
     setMaxWindowHeight(window.innerHeight - (window.innerHeight - 632) - 40);

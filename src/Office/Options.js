@@ -3,6 +3,13 @@ import { Button } from "react-bootstrap";
 import NameChangeModal from "./NameChangeModal.js";
 import ColorPickerModal from "./ColorPickerModal.js";
 
+//Option Bar underneath Office
+//Props:
+//nameSubmit: function to save Name change
+//colorSubmit: function to save color Change
+//userFullName: User Name for Jitsi Call
+//enterKey: KeyListener Hook for Enter key
+
 const Options = (props) => {
   const [showNameChange, setShowNameChange] = useState(false);
   const handleCloseNameChange = () => setShowNameChange(false);

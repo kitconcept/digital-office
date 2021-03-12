@@ -1,4 +1,8 @@
 //List of Parameters for the Rooms
+//width: room width
+//height: room height
+//left: room x position
+//top: room y position
 //name: jitsi Call ID
 //Title: Title for the Virtual Office
 

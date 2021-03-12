@@ -4,6 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Jitsi from "react-jitsi";
 import "../App.css";
 
+// Modal for Jitsi Call
+//Props:
+//roomName = Jitsi Call ID
+//userFullName : User Name for Jitsi Call
+//roomTitle: Title that shows on office floor
 const CallModal = (props) => {
   return (
     <Modal

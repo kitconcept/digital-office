@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Modal, Form, Col, Row, Button } from "react-bootstrap";
 
+// Name Change Modal
+// Props:
+// EnterKey: KeyListener Hook for Enter Key
+// show: boolean for showing modal
+// handleClose: function to close modal
+// nameSubmit: function to save Name Changes
+
 const NameChangeModal = (props) => {
   const [FirstName, setFirstName] = useState("");
   const [LastName, setLastName] = useState("");
   const inputEl = useRef(null);
-  // const setInputFocus = () => {
-  //   inputEl.current.focus();
-  // };
 
   useEffect(() => {
     if (props.EnterKey) {

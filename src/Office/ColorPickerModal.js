@@ -2,6 +2,9 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import "../App.css";
 
+// Color Picker
+// props:
+// colorSubmit: function for saving color changes
 const ColorPickerModal = (props) => {
   return (
     <Modal show={props.show} onHide={props.handleClose}>
