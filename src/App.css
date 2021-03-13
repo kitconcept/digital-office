@@ -1,38 +1,118 @@
-.App {
+.Office {
+  background-image: url("./assets/OfficeFloor.PNG");
+  width: 958px;
+  height: 742px;
+  margin: 10px;
+}
+
+.Avatar.Color {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  background: #cc8f16;
+  color: #f0f0f0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 7px;
+  border-radius: 50%;
   text-align: center;
+  box-shadow: inset 0 0 15px #333;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Room {
+  position: absolute;
+  text-align: center;
+  border-style: dotted;
+  padding: 5px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Options {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.btn-primary.Option {
+  margin: 5px;
+}
+.UserName {
+  padding: 8px;
+}
+
+.modal-dialog.modal-customWidth {
+  width: 835px;
+  max-width: 900px;
+}
+
+.modal-body.ColorPicker {
+  display: flex;
+}
+.Color {
+  font-size: 18px;
+  padding-top: 6px;
+  text-align: center;
+  margin: 1%;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  font-weight: bold;
+  box-shadow: inset 0 0 15px #333;
+}
+
+.Color.Red {
+  background-color: rgb(201, 31, 31);
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.Color.Red:hover {
+  background-color: rgb(155, 25, 25);
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Color.Orange {
+  background-color: rgb(216, 113, 17);
+  color: white;
+}
+.Color.Orange:hover {
+  background-color: rgb(155, 80, 11);
+}
+.Color.Yellow {
+  background-color: rgb(224, 221, 13);
+  color: black;
+}
+.Color.Yellow:hover {
+  background-color: rgb(187, 184, 9);
+}
+.Color.Green {
+  background-color: rgb(45, 204, 45);
+  color: black;
+}
+.Color.Green:hover {
+  background-color: rgb(34, 156, 34);
+}
+.Color.Teal {
+  background-color: rgb(24, 197, 209);
+  color: black;
+}
+.Color.Teal:hover {
+  background-color: rgb(17, 149, 158);
+}
+.Color.Blue {
+  background-color: rgb(11, 51, 230);
+  color: white;
+}
+.Color.Blue:hover {
+  background-color: rgb(6, 34, 156);
+}
+.Color.Black {
+  background-color: black;
+  color: white;
+}
+.Color.Black:hover {
+  background-color: rgb(68, 68, 68);
+}
+.Color.White {
+  background-color: white;
+  color: Black;
+}
+.Color.White:hover {
+  background-color: rgb(196, 196, 196);
 }
