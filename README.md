@@ -1,3 +1,5 @@
+[![Digital Office CI](https://github.com/kitconcept/digital-office/actions/workflows/ci.yml/badge.svg)](https://github.com/kitconcept/digital-office/actions/workflows/ci.yml)
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6faa0553-a205-4994-817c-2e3613e7e03a/deploy-status)](https://app.netlify.com/sites/digitaloffice/deploys)
 
 # Digital Office
