@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CallModal from "./CallModal.js";
-import "../App.css";
+import CallModal from "../Room/CallModal";
+import "../../../App.css";
 
 // Jitsi-Call Room
 //Props:
@@ -40,8 +40,8 @@ const Room = (props) => {
         style={{
           width: props.width,
           height: props.height,
-          top: props.top,
-          left: props.left,
+          top: props.top + props.windowDimensions[1],
+          left: props.left + props.windowDimensions[0],
         }}
       >
         {props.roomTitle}
@@ -65,6 +65,7 @@ function useAvatarPositionCheck(avatarPosition, left, top, width, height) {
 
   // Returns True if avatar is inside a Call-Room
   useEffect(() => {
+    console.log(avatarPosition[0], avatarPosition[1]);
     if (
       avatarPosition[0] > left - 1 &&
       avatarPosition[0] < left + width - 38 &&

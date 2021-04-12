@@ -6,21 +6,21 @@
 //name: jitsi Call ID
 //Title: Title for the Virtual Office
 
-const RoomList = [
+const roomList = [
   {
     width: 214,
-    height: 248,
-    left: 248,
-    top: 22,
+    height: 238,
+    left: 216,
+    top: 1,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440000",
     title: "Green Table",
   },
 
   {
     width: 232,
-    height: 396,
-    left: 665,
-    top: 85,
+    height: 405,
+    left: 618,
+    top: 50,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440001",
     title: "Red-Table",
   },
@@ -28,11 +28,11 @@ const RoomList = [
   {
     width: 280,
     height: 208,
-    left: 105,
-    top: 457,
+    left: 75,
+    top: 420,
     name: "kitconcept-digital-office-123e4567-e89b-12d3-a456-426655440002",
     title: "Yellow Table",
   },
 ];
 
-export default RoomList;
+export default roomList;
