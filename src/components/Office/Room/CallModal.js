@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Jitsi from "react-jitsi";
-import "../App.css";
+import "../../../App.css";
 
 // Modal for Jitsi Call
 //Props:
