@@ -4,7 +4,6 @@ import io from "socket.io-client";
 
 import Room from "./Room/Room.js";
 import roomList from "./Room/RoomList";
-import Options from "../Options/Options.js";
 import "../../App.css";
 
 // location of server
@@ -26,7 +25,6 @@ const Office = ({ location }) => {
   const aKey = useKeyPress("a");
   const sKey = useKeyPress("s");
   const dKey = useKeyPress("d");
-  const EnterKey = useKeyPress("Enter");
 
   // avatar List for render
   const [avatars, setAvatars] = useState([]);
@@ -107,7 +105,7 @@ const Office = ({ location }) => {
       {avatars.map((avatar) => (
         <div
           key={avatar.id}
-          className="Avatar Color"
+          className="Avatar"
           style={{
             background: avatar.color,
             left: avatar.x + windowDimensions[0],
@@ -117,13 +115,9 @@ const Office = ({ location }) => {
           {avatar.name.charAt(0).toUpperCase()}
         </div>
       ))}
-
-      {/* <Options
-        userFullName={userFullName}
-        nameSubmit={nameSubmit}
-        colorSubmit={colorSubmit}
-        EnterKey={EnterKey}
-      /> */}
+      <a href="/">
+        <button className="change button">change name</button>
+      </a>
     </div>
   );
 };

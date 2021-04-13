@@ -65,7 +65,6 @@ function useAvatarPositionCheck(avatarPosition, left, top, width, height) {
 
   // Returns True if avatar is inside a Call-Room
   useEffect(() => {
-    console.log(avatarPosition[0], avatarPosition[1]);
     if (
       avatarPosition[0] > left - 1 &&
       avatarPosition[0] < left + width - 38 &&
