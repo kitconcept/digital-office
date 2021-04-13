@@ -113,6 +113,7 @@ button:focus {
   height: 40px;
   background: #cc8f16;
   color: #f0f0f0;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   position: absolute;
   top: 0;
   left: 0;
@@ -141,4 +142,8 @@ button:focus {
   position: absolute;
   top: 1%;
   left: 86%;
+}
+
+.button.mt-20.submit {
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
