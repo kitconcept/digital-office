@@ -19,7 +19,7 @@ const Join = () => {
             onChange={(event) => setName(event.target.value)}
           />
           <Form.Control
-            className="joinInput mt-20"
+            className="mt-20"
             as="select"
             onChange={(event) => setColor(event.target.value)}
             placeholder="color"
