@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import queryString from "query-string";
 import io from "socket.io-client";
+import Options from "../Options/Options";
 
 import Room from "./Room/Room.js";
 import roomList from "./Room/RoomList";
@@ -60,10 +61,10 @@ const Office = ({ location }) => {
       if (ArrowUp | wKey && y > 0) {
         setY(y - 10);
       }
-      if (ArrowDown | sKey && y < 660) {
+      if (ArrowDown | sKey && y < 760) {
         setY(y + 10);
       }
-      if (ArrowRight | dKey && x < 760) {
+      if (ArrowRight | dKey && x < 860) {
         setX(x + 10);
       }
       if (ArrowLeft | aKey && x > 0) {
@@ -83,6 +84,7 @@ const Office = ({ location }) => {
 
   return (
     <div className="outerContainer">
+      <Options avatars={avatars} windowDimensions={windowDimensions} />
       <div className="officeContainer">
         <div className="Office">
           {roomList.map((room, i) => (
@@ -115,9 +117,6 @@ const Office = ({ location }) => {
           {avatar.name.charAt(0).toUpperCase()}
         </div>
       ))}
-      <a href="/">
-        <button className="change button">change name</button>
-      </a>
     </div>
   );
 };

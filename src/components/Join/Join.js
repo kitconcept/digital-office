@@ -13,7 +13,7 @@ const Join = () => {
         <h1 className="heading">Join Office</h1>
         <div>
           <input
-            placeholder="First Name - Last Name"
+            placeholder="Name"
             className="joinInput"
             type="text"
             onChange={(event) => setName(event.target.value)}
