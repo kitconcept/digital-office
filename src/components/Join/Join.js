@@ -13,13 +13,13 @@ const Join = () => {
         <h1 className="heading">Join Office</h1>
         <div>
           <input
-            placeholder="First Name - Last Name"
+            placeholder="Name"
             className="joinInput"
             type="text"
             onChange={(event) => setName(event.target.value)}
           />
           <Form.Control
-            className="joinInput mt-20"
+            className="mt-20"
             as="select"
             onChange={(event) => setColor(event.target.value)}
             placeholder="color"

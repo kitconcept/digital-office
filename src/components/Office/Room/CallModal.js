@@ -13,16 +13,13 @@ const CallModal = (props) => {
   return (
     <Modal
       {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
+      aria-labelledby="contained-modal-title"
       dialogClassName="modal-customWidth"
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {props.roomTitle}
-        </Modal.Title>
+      <Modal.Header className="callModalHeader" closeButton>
+        <Modal.Title id="contained-modal-title">{props.roomTitle}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="callModalBody">
         <Jitsi
           roomName={props.roomName}
           displayName={props.userFullName}
