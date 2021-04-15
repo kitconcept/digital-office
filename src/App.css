@@ -199,3 +199,8 @@ button:focus {
 .button.mt-20.submit {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+
+.select.option {
+  color: whitesmoke !important;
+  background: #bf5279 !important;
+}
