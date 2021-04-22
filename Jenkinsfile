@@ -15,17 +15,15 @@ pipeline {
 
   stages {
 
-    // --- BUILD ---
-    stage('Build') {
-      stage('Frontend') {
-        agent {
-          label "node"
-        }
-        steps {
-          deleteDir()
-          checkout scm
-          sh "make build-frontend"
-        }
+    // --- BUILD FRONTEND ---
+    stage('Frontend') {
+      agent {
+        label "node"
+      }
+      steps {
+        deleteDir()
+        checkout scm
+        sh "make build-frontend"
       }
     }
 
