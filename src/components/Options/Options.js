@@ -13,6 +13,14 @@ const Options = (props) => {
         <a href="/">
           <button className="change button">log out</button>
         </a>
+        <button
+          onClick={() =>
+            window.open("https://meet.google.com/was-czcz-wxc", "_blank")
+          }
+          className="meet button"
+        >
+          Google-Meet
+        </button>
         <div className="OptionsHading">Users Connected</div>
         {props.avatars.map((avatar) => (
           <div className="UserInRoom">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Jitsi from "react-jitsi";
@@ -21,6 +21,7 @@ const CallModal = (props) => {
       </Modal.Header>
       <Modal.Body className="callModalBody">
         <Jitsi
+          containerStyle={{ height: 700, width: 800 }}
           roomName={props.roomName}
           displayName={props.userFullName}
           config={{ prejoinPageEnabled: false }}

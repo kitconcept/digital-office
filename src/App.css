@@ -195,6 +195,14 @@ button:focus {
   font-size: small;
   margin-bottom: 20px;
 }
+.button.meet {
+  width: 175px;
+  height: 30px;
+  padding: 0;
+  background-color: green;
+  font-size: small;
+  margin-bottom: 20px;
+}
 
 .button.mt-20.submit {
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
