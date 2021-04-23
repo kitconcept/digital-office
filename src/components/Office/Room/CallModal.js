@@ -21,7 +21,7 @@ const CallModal = (props) => {
       </Modal.Header>
       <Modal.Body className="callModalBody">
         <Jitsi
-          containerStyle={{ height: 400 }}
+          containerStyle={{ height: 700, width: 800 }}
           roomName={props.roomName}
           displayName={props.userFullName}
           config={{ prejoinPageEnabled: false }}
