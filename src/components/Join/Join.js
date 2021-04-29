@@ -5,7 +5,7 @@ import "../../App.css";
 
 const Join = () => {
   const [name, setName] = useState("");
-  const [color, setColor] = useState("Aqua");
+  const [color, setColor] = useState("Grey");
 
   return (
     <div className="joinOuterContainer">
@@ -22,7 +22,7 @@ const Join = () => {
             className="mt-20"
             as="select"
             onChange={(event) => setColor(event.target.value)}
-            placeholder="color"
+            value={color}
           >
             <option>Aqua</option>
             <option>Black</option>
