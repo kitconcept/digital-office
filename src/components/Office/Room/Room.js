@@ -19,14 +19,10 @@ const Room = (props) => {
   const [usersInRoom, setUsersInRoom] = useState(0);
   const handleShow = () => setModalShow(true);
   const handleHide = () => setModalShow(false);
-  const handleRoomUpdate = (userCount) => {
-    setUsersInRoom(userCount);
 
-    console.log(usersInRoom, " : ", userCount);
-  };
   const handler = ({ roomName, userCount }) => {
     if (roomName === props.roomName) {
-      handleRoomUpdate(userCount);
+      setUsersInRoom(userCount);
     }
   };
 
@@ -50,7 +46,7 @@ const Room = (props) => {
     if (insideRoomFlag) {
       props.socket.emit("joinRoom", props.roomName);
 
-      //handleShow();
+      handleShow();
     } else {
       props.socket.emit("leaveRoom", props.roomName);
       handleHide();
@@ -79,6 +75,8 @@ const Room = (props) => {
           roomTitle={props.roomTitle}
           roomName={props.roomName}
           userFullName={props.userFullName}
+          usersInRoom={usersInRoom}
+          socket={props.socket}
         />
       }
     </>

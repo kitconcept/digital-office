@@ -170,8 +170,8 @@ button:focus {
 }
 
 .modal-dialog.modal-customWidth {
-  width: 835px;
-  max-width: 900px;
+  width: 1035px;
+  max-width: 1035px;
 }
 
 .modal-header.callModalHeader {
