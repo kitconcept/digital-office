@@ -8,14 +8,13 @@ import roomList from "./Room/RoomList";
 import "../../App.css";
 
 // location of server
-const ENDPOINT = "https://digitaloffice.kitconcept.io/";
-//const ENDPOINT = "localhost:5000";
-
+//const ENDPOINT = "https://avatario-test.herokuapp.com/";
+const ENDPOINT = "localhost:5000";
 
 //empty socket for connection
 let socket = io.connect(ENDPOINT, { transports: ["websocket"] });
 
-const Office = ({ location }) => {
+const Office = () => {
   //Calling Window Resize Hook
   const windowDimensions = useWindowResize();
   // Calling Key Listener Hook
@@ -27,6 +26,7 @@ const Office = ({ location }) => {
   const aKey = useKeyPress("a");
   const sKey = useKeyPress("s");
   const dKey = useKeyPress("d");
+  const enterKey = useKeyPress("Enter");
 
   // avatar List for render
   const [avatars, setAvatars] = useState([]);
@@ -37,13 +37,38 @@ const Office = ({ location }) => {
 
   // user name and color
   const [name, setName] = useState("");
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("grey");
+
+  // name Change
+  const [showNameChange, setShowNameChange] = useState(false);
+  const handleShowNameChange = () => {
+    setShowNameChange(true);
+  };
+  const handleHideNameChange = () => {
+    setShowNameChange(false);
+  };
+  const submit = () => {
+    document.cookie = "name=" + name + ";expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    handleHideNameChange();
+    socket.emit("leave");
+    socket.emit("join", { name, color, x, y });
+  };
 
   useEffect(() => {
-    // parse name and color from URL
-    const { name, color } = queryString.parse(location.search);
-    setName(name);
-    setColor(color);
+    let name = "";
+    if (
+      !document.cookie
+        .split(";")
+        .some((item) => item.trim().startsWith("name="))
+    ) {
+      handleShowNameChange();
+    } else {
+      name = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("name="))
+        .split("=")[1];
+      setName(name);
+    }
 
     // add Avatar to server list
     socket.emit("join", { name, color, x, y });
@@ -58,34 +83,57 @@ const Office = ({ location }) => {
 
   // user Avatar Movement
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (ArrowUp | wKey && y > 0) {
-        setY(y - 10);
+    if (showNameChange) {
+      if (enterKey) {
+        submit();
       }
-      if (ArrowDown | sKey && y < 660) {
-        setY(y + 10);
-      }
-      if (ArrowRight | dKey && x < 860) {
-        setX(x + 10);
-      }
-      if (ArrowLeft | aKey && x > 0) {
-        setX(x - 10);
-      }
-    }, 20);
+    }
+    if (!showNameChange) {
+      const interval = setInterval(() => {
+        if (ArrowUp | wKey && y > 0) {
+          setY(y - 10);
+        }
+        if (ArrowDown | sKey && y < 660) {
+          setY(y + 10);
+        }
+        if (ArrowRight | dKey && x < 860) {
+          setX(x + 10);
+        }
+        if (ArrowLeft | aKey && x > 0) {
+          setX(x - 10);
+        }
+      }, 20);
 
-    // update position to server
-    if (name !== "" && color !== "") {
-      socket.emit("update", { x, y });
+      // update position to server
+      if (name !== "" && color !== "") {
+        socket.emit("update", { x, y });
+      }
+
+      return () => clearInterval(interval);
     }
 
-    return () => clearInterval(interval);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ArrowUp, ArrowDown, ArrowRight, ArrowLeft, wKey, aKey, sKey, dKey, x, y]);
+  }, [
+    ArrowUp,
+    ArrowDown,
+    ArrowRight,
+    ArrowLeft,
+    wKey,
+    aKey,
+    sKey,
+    dKey,
+    x,
+    y,
+    enterKey,
+  ]);
 
   return (
     <div className="outerContainer">
-      <Options avatars={avatars} windowDimensions={windowDimensions} />
+      <Options
+        handleShowNameChange={handleShowNameChange}
+        avatars={avatars}
+        windowDimensions={windowDimensions}
+      />
       <div className="officeContainer">
         <div className="Office">
           {roomList.map((room, i) => (
@@ -120,6 +168,29 @@ const Office = ({ location }) => {
           {avatar.name.charAt(0).toUpperCase()}
         </div>
       ))}
+      {showNameChange === true && (
+        <div>
+          <div className="NameChangeBackDrop"></div>
+          <div className="NameChange">
+            <h1 className="heading">Change Name</h1>
+            <input
+              placeholder="Name"
+              className="joinInput"
+              type="text"
+              onChange={(event) => setName(event.target.value)}
+              autoFocus
+            />
+            <button
+              onClick={submit}
+              className="button mt-20 submit"
+              style={{ background: color }}
+              type="submit"
+            >
+              submit
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -155,7 +226,6 @@ function useKeyPress(targetKey) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return keyPressed;
 }
 
