@@ -16,8 +16,15 @@ import "../../../App.css";
 const Room = (props) => {
   //state for showing jitsi Call in a Modal
   const [modalShow, setModalShow] = useState(false);
+  const [usersInRoom, setUsersInRoom] = useState(0);
   const handleShow = () => setModalShow(true);
   const handleHide = () => setModalShow(false);
+
+  const handler = ({ roomName, userCount }) => {
+    if (roomName === props.roomName) {
+      setUsersInRoom(userCount);
+    }
+  };
 
   const insideRoomFlag = useAvatarPositionCheck(
     props.avatarPosition,
@@ -28,9 +35,24 @@ const Room = (props) => {
   );
 
   useEffect(() => {
+    props.socket.on("roomData", handler);
+
+    return () => {
+      props.socket.off("roomData", handler);
+    };
+  }, [usersInRoom]);
+
+  useEffect(() => {
     if (insideRoomFlag) {
+      props.socket.emit("joinRoom", props.roomName);
+
       handleShow();
-    } else handleHide();
+    } else {
+      props.socket.emit("leaveRoom", props.roomName);
+      handleHide();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [insideRoomFlag]);
 
   return (
@@ -53,6 +75,8 @@ const Room = (props) => {
           roomTitle={props.roomTitle}
           roomName={props.roomName}
           userFullName={props.userFullName}
+          usersInRoom={usersInRoom}
+          socket={props.socket}
         />
       }
     </>

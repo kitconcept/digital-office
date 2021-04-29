@@ -8,12 +8,12 @@ import roomList from "./Room/RoomList";
 import "../../App.css";
 
 // location of server
-//const ENDPOINT = "https://avatario-test.herokuapp.com/";
 const ENDPOINT = "https://digitaloffice.kitconcept.io/";
 //const ENDPOINT = "localhost:5000";
 
+
 //empty socket for connection
-let socket;
+let socket = io.connect(ENDPOINT, { transports: ["websocket"] });
 
 const Office = ({ location }) => {
   //Calling Window Resize Hook
@@ -44,8 +44,7 @@ const Office = ({ location }) => {
     const { name, color } = queryString.parse(location.search);
     setName(name);
     setColor(color);
-    // connect to socket
-    socket = io.connect(ENDPOINT, { transports: ["websocket"] });
+
     // add Avatar to server list
     socket.emit("join", { name, color, x, y });
 
@@ -53,6 +52,7 @@ const Office = ({ location }) => {
     socket.on("floorData", ({ avatars }) => {
       setAvatars(avatars);
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,7 +62,7 @@ const Office = ({ location }) => {
       if (ArrowUp | wKey && y > 0) {
         setY(y - 10);
       }
-      if (ArrowDown | sKey && y < 760) {
+      if (ArrowDown | sKey && y < 660) {
         setY(y + 10);
       }
       if (ArrowRight | dKey && x < 860) {
@@ -100,6 +100,8 @@ const Office = ({ location }) => {
               roomName={room.name}
               userFullName={name}
               avatarPosition={[x, y]}
+              avatars={avatars}
+              socket={socket}
             />
           ))}
         </div>
