@@ -17,6 +17,9 @@ const CallModal = (props) => {
     if (props.usersInRoom > 6) {
       setHeight(570);
     }
+    if (props.usersInRoom < 7) {
+      setHeight(386);
+    }
   }, [props.usersInRoom]);
 
   return (
