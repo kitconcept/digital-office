@@ -34,7 +34,7 @@ const Options = (props) => {
             >
               {avatar.name.charAt(0).toUpperCase()}
             </div>
-            <p>{avatar.name.toUpperCase()}</p>
+            <p>{avatar.name}</p>
           </div>
         ))}
       </div>
