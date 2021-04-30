@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import queryString from "query-string";
+import md5 from "md5";
 import io from "socket.io-client";
 import Options from "../Options/Options";
 
@@ -35,8 +35,9 @@ const Office = () => {
   const [x, setX] = useState(500);
   const [y, setY] = useState(500);
 
-  // user name and color
+  // user name and Gravatar
   const [name, setName] = useState("");
+  const [gravatar, setGravatar] = useState("");
 
   // name Change
   const [showNameChange, setShowNameChange] = useState(false);
@@ -46,14 +47,29 @@ const Office = () => {
   const handleHideNameChange = () => {
     setShowNameChange(false);
   };
+
+  // Gravatar Change
+  const [showGravatarChange, setShowGravatarChange] = useState(false);
+  const handleShowGravatarChange = () => {
+    setShowGravatarChange(true);
+  };
+  const handleHideGravatarChange = () => {
+    setShowGravatarChange(false);
+  };
+
   const submit = () => {
+    setGravatar(gravatar.trim().toLowerCase());
     document.cookie = "name=" + name + ";expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    document.cookie =
+      "gravatar=" + gravatar + ";expires=Fri, 31 Dec 9999 23:59:59 GMT";
     handleHideNameChange();
-    socket.emit("changeName", name);
+    handleHideGravatarChange();
+    socket.emit("changeName", { name, gravatar });
   };
 
   useEffect(() => {
     let name = "";
+    let gravatar = "";
     if (
       !document.cookie
         .split(";")
@@ -66,10 +82,15 @@ const Office = () => {
         .find((row) => row.startsWith("name="))
         .split("=")[1];
       setName(name);
+      gravatar = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("gravatar="))
+        .split("=")[1];
+      setGravatar(gravatar.trim().toLowerCase());
     }
 
     // add Avatar to server list
-    socket.emit("join", { name, x, y });
+    socket.emit("join", { name, gravatar, x, y });
 
     // listen for Avatarlist from server
     socket.on("floorData", ({ avatars }) => {
@@ -81,12 +102,11 @@ const Office = () => {
 
   // user Avatar Movement
   useEffect(() => {
-    if (showNameChange) {
+    if (showNameChange || showGravatarChange) {
       if (enterKey) {
         submit();
       }
-    }
-    if (!showNameChange) {
+    } else {
       const interval = setInterval(() => {
         if (ArrowUp | wKey && y > 0) {
           setY(y - 10);
@@ -129,6 +149,7 @@ const Office = () => {
     <div className="outerContainer">
       <Options
         handleShowNameChange={handleShowNameChange}
+        handleShowGravatarChange={handleShowGravatarChange}
         avatars={avatars}
         windowDimensions={windowDimensions}
       />
@@ -158,17 +179,24 @@ const Office = () => {
           key={avatar.id}
           className="Avatar"
           style={{
-            background: avatar.color,
             left: avatar.x + windowDimensions[0],
             top: avatar.y + windowDimensions[1],
           }}
         >
-          {avatar.name.charAt(0).toUpperCase()}
+          <p style={{ background: avatar.color }}>T</p>
+          <div
+            style={{
+              background:
+                "url(https://www.gravatar.com/avatar/" +
+                md5(avatar.gravatar) +
+                "?s=40&d=blank)",
+            }}
+          ></div>
         </div>
       ))}
       {showNameChange === true && (
         <div>
-          <div className="NameChangeBackDrop"></div>
+          <div onClick={submit} className="NameChangeBackDrop"></div>
           <div className="NameChange">
             <h1 className="heading">Change Name</h1>
             <input
@@ -178,6 +206,33 @@ const Office = () => {
               onChange={(event) => setName(event.target.value)}
               autoFocus
             />
+            <button
+              onClick={submit}
+              className="button mt-20 submit"
+              type="submit"
+            >
+              submit
+            </button>
+          </div>
+        </div>
+      )}
+      {showGravatarChange === true && (
+        <div>
+          <div onClick={submit} className="NameChangeBackDrop"></div>
+          <div className="NameChange">
+            <h1 className="heading">Change Picture</h1>
+            <input
+              placeholder="Account Email"
+              value={gravatar}
+              className="joinInput"
+              type="text"
+              onChange={(event) => setGravatar(event.target.value)}
+              autoFocus
+            />
+            <p className="text">
+              {"change your profile picture with: "}
+              <a href="http://en.gravatar.com/">Gravatar</a>
+            </p>
             <button
               onClick={submit}
               className="button mt-20 submit"
