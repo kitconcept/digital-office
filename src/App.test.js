@@ -4,6 +4,6 @@ import App from "./App";
 
 test("renders Join Office", () => {
   render(<App />);
-  const linkElement = screen.getByText(/Join Office/i);
+  const linkElement = screen.getByText(/Users Connected/i);
   expect(linkElement).toBeInTheDocument();
 });

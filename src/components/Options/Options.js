@@ -10,9 +10,10 @@ const Options = (props) => {
       }}
     >
       <div className="optionsContainer">
-        <a href="/">
-          <button className="change button">log out</button>
-        </a>
+        <button onClick={props.handleShowNameChange} className="change button">
+          change name
+        </button>
+
         <button
           onClick={() =>
             window.open("https://meet.google.com/was-czcz-wxc", "_blank")

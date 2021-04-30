@@ -13,19 +13,6 @@ body {
   box-sizing: border-box;
 }
 
-.joinOuterContainer {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
-  align-items: center;
-  background-color: #1a1a1d;
-}
-
-.joinInnerContainer {
-  width: 20%;
-}
-
 .joinInput {
   border-radius: 0;
   padding: 15px 20px;
@@ -43,7 +30,7 @@ body {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
+  background-color: rgb(196, 22, 22);
   padding: 20px;
   border-radius: 5px;
   display: inline-block;
@@ -53,16 +40,6 @@ body {
 
 .mt-20 {
   margin-top: 20px;
-}
-
-@media (min-width: 320px) and (max-width: 480px) {
-  .joinOuterContainer {
-    height: 100%;
-  }
-
-  .joinInnerContainer {
-    width: 90%;
-  }
 }
 
 button:focus {
@@ -190,8 +167,8 @@ button:focus {
 .button.change {
   width: 175px;
   height: 30px;
+
   padding: 0;
-  background-color: red;
   font-size: small;
   margin-bottom: 20px;
 }
@@ -199,7 +176,6 @@ button:focus {
   width: 175px;
   height: 30px;
   padding: 0;
-  background-color: green;
   font-size: small;
   margin-bottom: 20px;
 }
@@ -211,4 +187,27 @@ button:focus {
 .select.option {
   color: whitesmoke !important;
   background: #bf5279 !important;
+}
+
+.NameChange {
+  background-color: #1a1a1d;
+  position: absolute;
+  border: 2px;
+  border-style: solid;
+  border-color: grey;
+  border-radius: 8px;
+  padding: 25px;
+  width: 30%;
+  text-align: center;
+  top: 25%;
+  left: 35%;
+}
+.NameChangeBackDrop {
+  background-color: #1a1a1d;
+  opacity: 0.5;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
