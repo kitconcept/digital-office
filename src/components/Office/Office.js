@@ -183,7 +183,6 @@ const Office = () => {
             <button
               onClick={submit}
               className="button mt-20 submit"
-              style={{ background: color }}
               type="submit"
             >
               submit
