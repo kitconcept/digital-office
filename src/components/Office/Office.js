@@ -183,7 +183,7 @@ const Office = () => {
             top: avatar.y + windowDimensions[1],
           }}
         >
-          <p style={{ background: avatar.color }}>T</p>
+          <p style={{ background: avatar.color }}>{avatar.name.charAt(0)}</p>
           <div
             style={{
               background:

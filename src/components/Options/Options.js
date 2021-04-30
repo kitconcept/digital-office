@@ -33,7 +33,9 @@ const Options = (props) => {
         {props.avatars.map((avatar) => (
           <div className="UserInRoom">
             <div key={avatar.id} className="AvatarIcon">
-              <p style={{ background: avatar.color }}>T</p>
+              <p style={{ background: avatar.color }}>
+                {avatar.name.charAt(0)}
+              </p>
               <div
                 style={{
                   background:
@@ -43,15 +45,7 @@ const Options = (props) => {
                 }}
               ></div>
             </div>
-            {/* <div
-              key={avatar.id}
-              className="AvatarIcon"
-              style={{
-                background: avatar.color,
-              }}
-            >
-              {avatar.name.charAt(0).toUpperCase()}
-            </div> */}
+
             <p>{avatar.name}</p>
           </div>
         ))}
