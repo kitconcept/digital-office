@@ -1,4 +1,5 @@
 import React from "react";
+import md5 from "md5";
 
 const Options = (props) => {
   return (
@@ -13,6 +14,12 @@ const Options = (props) => {
         <button onClick={props.handleShowNameChange} className="change button">
           change name
         </button>
+        <button
+          onClick={props.handleShowGravatarChange}
+          className="change button"
+        >
+          change picture
+        </button>
 
         <button
           onClick={() =>
@@ -25,7 +32,18 @@ const Options = (props) => {
         <div className="OptionsHading">Users Connected</div>
         {props.avatars.map((avatar) => (
           <div className="UserInRoom">
-            <div
+            <div key={avatar.id} className="AvatarIcon">
+              <p style={{ background: avatar.color }}>T</p>
+              <div
+                style={{
+                  background:
+                    "url(https://www.gravatar.com/avatar/" +
+                    md5(avatar.gravatar) +
+                    "?s=20&d=blank)",
+                }}
+              ></div>
+            </div>
+            {/* <div
               key={avatar.id}
               className="AvatarIcon"
               style={{
@@ -33,7 +51,7 @@ const Options = (props) => {
               }}
             >
               {avatar.name.charAt(0).toUpperCase()}
-            </div>
+            </div> */}
             <p>{avatar.name}</p>
           </div>
         ))}
