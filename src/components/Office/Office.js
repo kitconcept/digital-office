@@ -37,7 +37,6 @@ const Office = () => {
 
   // user name and color
   const [name, setName] = useState("");
-  const [color, setColor] = useState("grey");
 
   // name Change
   const [showNameChange, setShowNameChange] = useState(false);
@@ -50,8 +49,7 @@ const Office = () => {
   const submit = () => {
     document.cookie = "name=" + name + ";expires=Fri, 31 Dec 9999 23:59:59 GMT";
     handleHideNameChange();
-    socket.emit("leave");
-    socket.emit("join", { name, color, x, y });
+    socket.emit("changeName", name);
   };
 
   useEffect(() => {
@@ -71,7 +69,7 @@ const Office = () => {
     }
 
     // add Avatar to server list
-    socket.emit("join", { name, color, x, y });
+    socket.emit("join", { name, x, y });
 
     // listen for Avatarlist from server
     socket.on("floorData", ({ avatars }) => {
@@ -105,7 +103,7 @@ const Office = () => {
       }, 20);
 
       // update position to server
-      if (name !== "" && color !== "") {
+      if (name !== "") {
         socket.emit("update", { x, y });
       }
 
