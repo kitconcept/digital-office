@@ -30,7 +30,7 @@ body {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979ff;
+  background-color: rgb(196, 22, 22);
   padding: 20px;
   border-radius: 5px;
   display: inline-block;
@@ -167,6 +167,7 @@ button:focus {
 .button.change {
   width: 175px;
   height: 30px;
+
   padding: 0;
   font-size: small;
   margin-bottom: 20px;
@@ -175,7 +176,6 @@ button:focus {
   width: 175px;
   height: 30px;
   padding: 0;
-  background-color: green;
   font-size: small;
   margin-bottom: 20px;
 }
